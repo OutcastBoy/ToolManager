@@ -1,7 +1,7 @@
 package com.tool;
 
-import com.tool.tomcat.monitor.model.TomCatModel;
-import com.tool.tomcat.monitor.service.TomCatService;
+import com.tool.tomcat.monitor.model.TomcatModel;
+import com.tool.tomcat.monitor.service.TomcatService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +13,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class ToolMangaerApplicationTests {
 
     @Autowired
-    private TomCatService service;
+    private TomcatService service;
     @Test
     public void contextLoads() {
-       TomCatModel t=new TomCatModel();
+       TomcatModel t=new TomcatModel();
        t.setUser("user");
        t.setPassword("user");
        t.setIp("123");

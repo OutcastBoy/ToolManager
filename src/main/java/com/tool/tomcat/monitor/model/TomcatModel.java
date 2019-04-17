@@ -14,19 +14,16 @@ import lombok.ToString;
  */
 @Data
 @ToString
-@Table(name="T_TOMCAT")
-public class TomCatModel extends BaseModel {
+public class TomcatModel {
 
-    @Column(name = "ID",type = MySqlTypeConstant.INT,length = 11,isKey = true,isAutoIncrement = true)
     private String id;
 
-    @Column(name = "USER",type = MySqlTypeConstant.VARCHAR,length = 32)
     private String user;
 
-    @Column(name = "PASSWORD",type = MySqlTypeConstant.VARCHAR,length = 32)
+
     private String password;
 
-    @Column(name = "IP",type = MySqlTypeConstant.VARCHAR,length = 32)
     private String ip;
 
+    private String port;
 }

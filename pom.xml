@@ -61,12 +61,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- mybatis自动创建表依赖包 -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.1.10</version>
-        </dependency>
         <!-- lombok插件依赖包 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -80,8 +74,26 @@
             <artifactId>druid</artifactId>
             <version>1.0.29</version>
         </dependency>
+        <!-- xml解析所需的第三方包 -->
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>jaxen</groupId>
+            <artifactId>jaxen</artifactId>
+            <version>1.2.0</version>
+        </dependency>
 
+        <!-- fastjson依赖包 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.57</version>
+        </dependency>
     </dependencies>
+
 
     <build>
         <plugins>

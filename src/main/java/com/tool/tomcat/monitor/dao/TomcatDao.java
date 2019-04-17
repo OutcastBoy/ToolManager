@@ -1,6 +1,7 @@
 package com.tool.tomcat.monitor.dao;
 
-import com.tool.tomcat.monitor.model.TomCatModel;
+import com.tool.tomcat.monitor.model.TomcatModel;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -15,11 +16,14 @@ import java.util.List;
  */
 @Mapper
 @Component(value = "tomCatDao")
-public interface TomCatDao {
+public interface TomcatDao {
 
     @Select("SELECT * FROM T_TOMCAT")
-    List<TomCatModel> getAll();
+    List<TomcatModel> getAll();
 
-    @Insert("INSERT INTO T_TOMCAT(USER,PASSWORD,IP) VALUES(#{user},#{password},#{ip})")
-    void add(TomCatModel model);
+    @Insert("INSERT INTO T_TOMCAT(USER,PASSWORD,IP,PORT) VALUES(#{user},#{password},#{ip},#{port})")
+    void add(TomcatModel model);
+
+    @Delete("DELETE FROM T_TOMCAT WHERE ID=#{id}")
+    void delete(String id);
 }
