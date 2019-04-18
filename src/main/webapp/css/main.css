@@ -1,0 +1,32 @@
+.center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 380px;
+/*  border:1px solid red;*/
+  -webkit-transform: translateX(-50%) translateY(-50%);
+}
+
+.button{
+	height: 150px;
+	line-height: 120px;
+	background-color: #000000;
+}
+
+
+body {
+  margin: 0;
+  background: #000000;
+  min-width: 940px;
+}
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+circle {
+  fill: none;
+  stroke-width: 2.5px;
+}

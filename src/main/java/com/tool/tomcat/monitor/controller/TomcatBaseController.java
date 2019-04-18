@@ -52,6 +52,7 @@ public class TomcatBaseController {
         }
     }
 
+    @RequestMapping("/deleteTomcat.do")
     public String deleteTomcat(@RequestParam(name = "id") String id){
         try{
             tomcatService.delete(id);

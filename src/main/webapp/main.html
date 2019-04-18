@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html
+	<head>
+		<meta charset="utf-8" />
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="description" content="">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<meta name="robots" content="all,follow">
+
+		<title></title>
+	
+	<link rel="stylesheet" href="css/button.css" />
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet"href="css/main.css" />
+	
+	<script src="js/yls/d3.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.8.3.js" ></script>
+	</head>
+	<body>
+		<div class="col-md-12 tenth-button mt-5 center">
+            <a href="mainPage/index.html" class="btn btn-lg red button">数据源</a>
+            <a href="mainPage/index.html" class="btn btn-lg green button">监控</a>
+            <a href="mainPage/index.html" class="btn btn-lg orange button">demo</a>
+            <a href="mainPage/index.html" class="btn btn-lg blue button">demo</a>
+        </div>
+	</body>
+	
+
+</html>
+<script>
+
+var width = Math.max(960, innerWidth),
+    height = Math.max(500, innerHeight);
+
+var i = 0;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+    .attr("width", width)
+    .attr("height", height)
+  .on("ontouchstart" in document ? "touchmove" : "mousemove", particle);
+
+function particle() {
+  var m = d3.mouse(this);
+  svg.insert("circle", "rect")
+      .attr("cx", m[0])
+      .attr("cy", m[1])
+      .attr("r", 1e-6)
+      .style("stroke", d3.hsl((i = (i + 1) % 360), 1, .5))
+      .style("stroke-opacity", 1)
+    .transition()
+      .duration(2000)
+      .ease(Math.sqrt)
+      .attr("r", 100)
+      .style("stroke-opacity", 1e-6)
+      .remove();
+
+  d3.event.preventDefault();
+}
+
+function particle02() {
+	console.log(1111111111)
+	var m = []
+	m.push(Math.random()*1600)
+	m.push(Math.random()*800)
+  	svg.insert("circle", "rect")
+      .attr("cx", m[0])
+      .attr("cy", m[1])
+      .attr("r", 3)
+      .style("stroke", d3.hsl((i = (i + 1) % 360), 1, .5))
+      .style("stroke-opacity", 1)
+    .transition()
+      .duration(2000)
+      .ease(Math.sqrt)
+      .attr("r", 50)
+      .style("stroke-opacity", 1e-6)
+      .remove();
+}
+
+var tmp=window.setInterval(particle02,100);
+
+</script>
