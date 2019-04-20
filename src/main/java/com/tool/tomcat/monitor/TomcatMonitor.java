@@ -69,7 +69,7 @@ public class TomcatMonitor implements IMonitor {
             List<Element> memList=xml.getDocument().selectNodes("/status/jvm/memory");
             Map<String,String> memMap=new HashMap<>();
             memList.forEach(m1->{//获取内存使用情况
-                memMap.put("free",m1.attribute("max").getValue());
+                memMap.put("free",m1.attribute("free").getValue());
                 memMap.put("total",m1.attribute("total").getValue());
                 memMap.put("max",m1.attribute("max").getValue());
             });
