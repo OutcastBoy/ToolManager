@@ -11,87 +11,164 @@
     <style>
         *{margin:0;padding:0;}
         body,html{
-            height: 97%;
-            width: 97%;
-            padding: 1%;
+            height: 100%;
+            width: 100%;
         }
-        .main-top-left,.main-top-right,.main-bottom-left,.main-bottom-right{
-            width: 50%;
-            height: 50%;
-        }
-        .main-top-left{
-            background-color: yellow;
-            display: inline-block;
-        }
-        .main-top-right{
-            background-color: red;
-            float: right;
-        }
-        .main-bottom-left{
-            background-color: green;
-            display: inline-block;
 
+        .header {
+            /*background: blue;*/
+            height: 50px;
+            width: 100%;
+            position: relative;
+            text-align: center;
+            line-height: 50px;
+            /*父div的位置设置成相对的*/
+            top: 0;
         }
-        .main-bottom-right{
-            background-color: gray;
-            float: right;
+
+        .footer {
+            /*background: blue;*/
+            height: 50px;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+            line-height: 50px;
         }
+
+
+        .flex_top{
+            /*background-color: pink;*/
+            display: flex;		/* 设置为弹性布局 */
+            flex-direction: column;
+            /*height: 100%;*/
+            position: absolute;
+            width: 100%;
+            height: auto;
+            top: 50px;
+            bottom: 50px;
+        }
+        .flex_chird{
+            /*background-color: blue;*/
+            margin: 5px;
+        }
+        .top{
+            flex:1;		/* 定义放大缩小比例，子元素本来大小 */
+            order:0;			/* 定义子元素排列顺序 */
+            /*background-color: blue;*/
+            display: flex;		/* 设置为弹性布局 */
+            flex-direction: row;
+        }
+        .bottom{
+            flex:1;
+            order:1;
+            /*background-color: blue;*/
+            display: flex;		/* 设置为弹性布局 */
+            flex-direction: row;
+        }
+
+        .flex_list{
+            background-color: red;
+            margin: 0px 5px;
+            border: 1px solid yellow;
+        }
+
+        .flex_chird_one{
+            flex:1;
+            order:1;
+        }
+        .flex_chird_two{
+            flex:1;
+            order:2;
+        }
+        .flex_chird_three{
+            flex:1;
+            order:3;
+        }
+        .flex_chird_four{
+            flex:1;
+            order:4;
+        }
+
     </style>
 </head>
 <body>
-<div class="main-top-left" id="main-top-left">左列</div>
-<div class="main-top-right" id="main-top-right">右列</div>
-<div class="main-bottom-left" id="main-bottom-left">左列</div>
-<div class="main-bottom-right" id="main-bottom-right">右列</div>
-<!--<div id='a' style="width: 50px;height: 80px;background-color: red;"></div>
-<div id='b' style="width: 50px;height: 80px;background-color: red;"></div>-->
+<div class="header"><span><font color="#fff">ip地址</font></span></div>
+<div class="flex_top">
+    <div class="flex_chird top">
+        <div class="flex_list flex_chird_one" id="main_top_memory">1</div>
+        <div class="flex_list flex_chird_two" id="main_top_jvm">2</div>
+    </div>
+    <div class="flex_chird bottom">
+        <div class="flex_list flex_chird_one" id="main_bottom_request_left">1</div>
+        <div class="flex_list flex_chird_two" id="main_bottom_request_right">2</div>
+        <div class="flex_list flex_chird_three" id="main_bottom_thread_left">1</div>
+        <div class="flex_list flex_chird_four" id="main_bottom_thread_right">2</div>
+    </div>
+</div>
+<div class="footer"><span><font color="red">内容待定</font></span></div>
 </body>
 
 <script>
-    //		$("#a").click(function(event){
-    //  		$("#b").show();
-    //  		event.stop();
-    //		});
-    //
-    //		$(document).click(function(){
-    //			$("#b").hide()
-    //		});
     // 基于准备好的dom，初始化echarts实例
-    var myChart_top_left = echarts.init(document.getElementById('main-top-left'));
+    var myChart_top_mempory = echarts.init(document.getElementById('main_top_memory'));
     // 基于准备好的dom，初始化echarts实例
-    var myChart_top_right = echarts.init(document.getElementById('main-top-right'));
+    var myChart_top_jvm = echarts.init(document.getElementById('main_top_jvm'));
     // 基于准备好的dom，初始化echarts实例
-    var myChart_bottom_left = echarts.init(document.getElementById('main-bottom-left'));
+    var myChart_bottom_request_left = echarts.init(document.getElementById('main_bottom_request_left'));
     // 基于准备好的dom，初始化echarts实例
-    var myChart_bottom_right = echarts.init(document.getElementById('main-bottom-right'));
+    var myChart_bottom_request_right = echarts.init(document.getElementById('main_bottom_request_right'));
+    // 基于准备好的dom，初始化echarts实例
+    var myChart_bottom_thread_left = echarts.init(document.getElementById('main_bottom_thread_left'));
+    // 基于准备好的dom，初始化echarts实例
+    var myChart_bottom_thread_right = echarts.init(document.getElementById('main_bottom_thread_right'));
 
     var option = getOption();
-    myChart_top_left.setOption(option);
-    myChart_top_right.setOption(option);
-    myChart_bottom_left.setOption(option);
-    myChart_bottom_right.setOption(option);
+    myChart_top_mempory.setOption(option);
+    myChart_top_jvm.setOption(option);
+    myChart_bottom_request_left.setOption(option);
+    myChart_bottom_request_right.setOption(option);
+    myChart_bottom_thread_left.setOption(option);
+    myChart_bottom_thread_right.setOption(option);
+
     var date = [];
     var newData = [];
     var memoryData = [];
     var jvmData = [];
+    var requestFirstPortData = [];
+    var requestSencondPortData = [];
+    var threadFirstPortData = [];
+    var threadSencondPortData = [];
     setInterval(function() {
         date.push(getNowTime());
         $.post("../getTomcatInfo.do",function(data,status){
             // alert("Data: " + data + "nStatus: " + status);
             //获取请求的数据，并转为json开始解析
             var tomcatJosnData = JSON.parse(data).tomcat_1;
+            //设置ip
+            $(".header").html('<span><font color="#fff" size="5px">'+tomcatJosnData.address+'</font></span>')
+
             //内存使用情况
-            var memory = tomcatJosnData.memory
+            var memory = tomcatJosnData.memory;
             newData.push((memory.total-memory.free)/1024/1024);
             memoryData.push((memory.total-memory.free)/1024/1024);
 
             //jvm使用情况
-            //vat jvm = tomcatJosnData.
+            // vat jvm = tomcatJosnData.
+
+            //请求信息
+            var requestInfoArr = tomcatJosnData.requestInfo;
+            // console.log(requestInfoArr[0].port)
+            requestFirstPortData.push(requestInfoArr[0].requestCount)
+            requestSencondPortData.push(requestInfoArr[1].requestCount)
 
             //线程情况
-            var threadInfo = tomcatJosnData.threadInfo;
+            var threadInfoArr = tomcatJosnData.threadInfo;
+            // console.log(threadInfoArr[0].port);
+            threadFirstPortData.push(threadInfoArr[0].currentThreadsBusy);
+            threadSencondPortData.push(threadInfoArr[1].currentThreadsBusy);
 
-            myChart_top_left.setOption({
+            myChart_top_mempory.setOption({
                 title:{
                     text:'内存使用情况(max:'+memory.max/1024/1024+'MB)'
                 },
@@ -103,7 +180,7 @@
                     data: memoryData
                 }]
             });
-            myChart_top_right.setOption({
+            myChart_top_jvm.setOption({
                 title:{
                     text:'jvm使用情况'
                 },
@@ -115,28 +192,60 @@
                     data: newData
                 }]
             });
-            myChart_bottom_left.setOption({
+            myChart_bottom_request_left.setOption({
                 title:{
-                    text:'连接使用情况'
+                    text:'请求信息(port):'+requestInfoArr[0].port
                 },
                 xAxis: {
                     data: date
                 },
                 series: [{
-                    name:'连接使用情况',
-                    data: newData
+                    name:'请求信息(port):'+requestInfoArr[0].port,
+                    data: requestFirstPortData
                 }]
             });
-            myChart_bottom_right.setOption({
+            myChart_bottom_request_right.setOption({
                 title:{
-                    text:'线程使用情况'
+                    text:'请求信息(port):'+requestInfoArr[1].port
                 },
                 xAxis: {
                     data: date
                 },
                 series: [{
-                    name:'线程使用情况',
-                    data: newData
+                    name:'请求信息(port):'+requestInfoArr[1].port,
+                    data: requestSencondPortData
+                }]
+            });
+            myChart_bottom_thread_left.setOption({
+                title:{
+                    text:"线程池情况(port:"+threadInfoArr[0].port
+                    +"，max："+threadInfoArr[0].maxThreads
+                    +"，当前线程池:"+threadInfoArr[1].currentThreadCount+")"
+                },
+                xAxis: {
+                    data: date
+                },
+                series: [{
+                    name:"线程池情况(port:"+threadInfoArr[0].port
+                    +"，max："+threadInfoArr[0].maxThreads
+                    +"，当前线程池:"+threadInfoArr[1].currentThreadCount+")",
+                    data: threadFirstPortData
+                }]
+            });
+            myChart_bottom_thread_right.setOption({
+                title:{
+                    text:"线程池情况(port:"+threadInfoArr[1].port
+                    +"，max："+threadInfoArr[1].maxThreads
+                    +"，当前线程池:"+threadInfoArr[1].currentThreadCount+")"
+                },
+                xAxis: {
+                    data: date
+                },
+                series: [{
+                    name:"线程池情况(port:"+threadInfoArr[1].port
+                    +"，max："+threadInfoArr[1].maxThreads
+                    +"，当前线程池:"+threadInfoArr[1].currentThreadCount+")",
+                    data: threadSencondPortData
                 }]
             });
         });

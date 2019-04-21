@@ -1,8 +1,11 @@
 function getOption(data,date) {
     option = {
-//		title: {
-//			text: '动态数据 + 时间坐标轴'
-//		},
+		title: {
+			//text: '动态数据 + 时间坐标轴'
+            textStyle:{
+                fontSize:12,
+            }
+		},
         backgroundColor: '#fff',
         tooltip: {
             trigger: 'axis',
@@ -10,7 +13,7 @@ function getOption(data,date) {
                 params = params[0];
                 var tipDate = params.name;
                 var tipData = params.data;
-                return tipDate + ' : ' + tipData + 'MB';
+                return tipDate + ' : ' + tipData;
             },
             axisPointer: {
                 animation: false
