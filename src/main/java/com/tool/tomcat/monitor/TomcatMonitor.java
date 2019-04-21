@@ -84,7 +84,7 @@ public class TomcatMonitor implements IMonitor {
                 m1.put("usageCommitted",j.attribute("usageCommitted").getValue());
                 m1.put("usageMax",j.attribute("usageMax").getValue());
                 m1.put("usageUsed",j.attribute("usageUsed").getValue());
-                resultMap.put(j.attribute("name").getValue(),m1);
+                resultMap.put(j.attribute("name").getValue().replace(" ",""),m1);
             });
 
             JSONArray threadInfo=new JSONArray();
