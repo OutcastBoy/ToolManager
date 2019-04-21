@@ -1,5 +1,6 @@
 package com.tool.tomcat.monitor;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.tool.base.monitor.IMonitor;
 import com.tool.base.utils.XmlUtils;
@@ -17,6 +18,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author qiup
@@ -83,18 +86,25 @@ public class TomcatMonitor implements IMonitor {
                 m1.put("usageUsed",j.attribute("usageUsed").getValue());
                 resultMap.put(j.attribute("name").getValue(),m1);
             });
-            JSONObject threadInfo=new JSONObject();
+
+            JSONArray threadInfo=new JSONArray();
             List<Element> thread=xml.getDocument().selectNodes("/status/connector/threadInfo");
             thread.forEach(c->{ //线程信息
                 Map<String,String> m1=new HashMap<>();
                 m1.put("maxThreads",c.attribute("maxThreads").getValue());
                 m1.put("currentThreadCount",c.attribute("currentThreadCount").getValue());
                 m1.put("currentThreadsBusy",c.attribute("currentThreadsBusy").getValue());
-                threadInfo.put(c.getParent().attribute("name").getValue().replace("\\D",""),m1);
+                String regEx="[^0-9]";
+                Pattern p = Pattern.compile(regEx);
+                Matcher m2 = p.matcher(c.getParent().attribute("name").getValue().replace("\\D",""));
+                m1.put("port",m2.replaceAll("").trim());
+                threadInfo.add(m1);
             });
-            JSONObject requestInfo=new JSONObject();
+            JSONArray requestInfo=new JSONArray();
             List<Element> request=xml.getDocument().selectNodes("/status/connector/requestInfo");
             request.forEach(r->{ //连接信息
+
+
                 Map<String,String> m1=new HashMap<>();
                 m1.put("maxTime",r.attribute("maxTime").getValue());
                 m1.put("processingTime",r.attribute("p" +
@@ -103,8 +113,13 @@ public class TomcatMonitor implements IMonitor {
                 m1.put("errorCount",r.attribute("errorCount").getValue());
                 m1.put("bytesReceived",r.attribute("bytesReceived").getValue());
                 m1.put("bytesSent",r.attribute("bytesSent").getValue());
-                requestInfo.put(r.getParent().attribute("name").getValue().replace("\\D",""),m1);
+                String regEx="[^0-9]";
+                Pattern p = Pattern.compile(regEx);
+                Matcher m2 = p.matcher(r.getParent().attribute("name").getValue().replace("\\D",""));
+                m1.put("port",m2.replaceAll("").trim());
+                requestInfo.add(m1);
             });
+
             resultMap.put("threadInfo",threadInfo);
             resultMap.put("requestInfo",requestInfo);
             result.put(m.getId(),resultMap);
